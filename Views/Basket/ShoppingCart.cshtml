@@ -1,0 +1,70 @@
+﻿@model ShoppingCartVM
+
+@{
+    ViewData["Title"] = "ShoppingCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="text-center">
+            <h2>Səbətiniz</h2>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Say</th>
+                    <th>Məhsul</th>
+                    <th>Qiymət</th>
+                    <th>Cəm</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CardItems)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <a class="text-danger" asp-controller="Basket" asp-action="RemoveItemFromShoppingCart"
+                               asp-route-id="@item.Wine.Id">
+                                <i class="bi bi-dash-circle"></i>
+                            </a>
+                            @item.Amount
+                            <a class="text-success" asp-controller="Basket" asp-action="AddItemToShoppingCart"
+                               asp-route-id="@item.Wine.Id">
+                                <i class="bi bi-plus-circle"></i>
+                            </a>
+                        </td>
+                        <td class="align-middle">@item.Wine.Name</td>
+                        <td class="align-middle">@item.Wine.Price.ToString("c")</td>
+                        <td class="align-middle">@((item.Amount * item.Wine.Price).ToString("c"))</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><b>Cəm:</b></td>
+                    <td>
+                        @Model.Total.ToString("c")
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="text-right">
+            <div class="btn-group">
+                <a class="btn btn-outline-primary" asp-controller="Order" asp-action="CompleteOrder">
+                    Sifarişi tamamlayın
+                </a>
+                <div id="paypal-btn"></div>
+                <span style="padding:5px"></span>
+                <a class="btn btn-outline-success" asp-controller="Wine" asp-action="Index">
+                    Daha çox sifariş edin
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

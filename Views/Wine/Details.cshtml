@@ -1,0 +1,51 @@
+﻿@model Wine
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    double price=Convert.ToDouble(1.7*Model.Price);
+}
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                Tam Adı: @Model.Name
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="~/assets/winery/img/@Model.ImageUrl" width="120" height="180" alt="@Model.Name">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>Özəllikləri: @Model.Specifications</b>
+                        </p>
+                        <p class="card-text">
+                            <b>Kateqoriya: @Model.Category.Name</b>
+                        </p>
+                        <p class="card-text">
+                            <b>Qiymət: @Model.Price$~(Təqribi @price Azn)</b>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a class="btn btn-outline-primary float-right" asp-controller="Wine" asp-action="Index">
+                                Geri
+                            </a>
+                            <a class="btn btn-primary text-white"
+                               asp-controller="Basket" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id">
+                               <i class="bi bi-cart-plus"></i> Səbətə Əlavə et</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

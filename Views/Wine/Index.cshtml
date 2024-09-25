@@ -1,0 +1,47 @@
+﻿@model List<Wine>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <section class="team-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <h1>Şərablarımızın kolleksiyası ilə tanış olun</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-2 col-sm-4">
+                        <div class="team-1-member">
+                            <img alt="Team Member" class="background-image" src="~/assets/winery/img/@item.ImageUrl">
+                            <h5>@item.Name</h5>
+                            <span>@item.Specifications.Substring(0,10)</span><br>
+                            <span>Qiymət: $@item.Price</span><br>
+                            <a class="btn btn-primary" asp-controller="Basket"
+                               asp-action="AddItemToShoppingCart"
+                               asp-route-id="@item.Id">Səbətə Əlavə et</a>
+                            <a class="btn btn-secondary" asp-controller="Wine"
+                               asp-action="Details"
+                               asp-route-id="@item.Id">Xüsusiyyətlər</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="duplicatable-content pure-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h1>Hansı zövqünüzü oxşayır?</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
